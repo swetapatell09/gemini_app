@@ -51,7 +51,7 @@ class DbHelper {
     return modelList;
   }
 
-  Future<void> deleteData({required String id}) async {
+  Future<void> deleteData({required int id}) async {
     database = await checkDb();
     database!.delete(
       "searchTable",

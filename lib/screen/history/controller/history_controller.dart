@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class LikeController extends GetxController {
+class HistoryController extends GetxController {
   // RxList<DbModel> searchList = <DbModel>[].obs;
 
   // Future<void> getData() async {

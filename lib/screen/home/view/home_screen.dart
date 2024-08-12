@@ -1,13 +1,14 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gemini_app/screen/history/controller/history_controller.dart';
 import 'package:gemini_app/screen/home/controller/home_controller.dart';
-import 'package:gemini_app/screen/like/controller/like_controller.dart';
 import 'package:gemini_app/screen/splash/model/db_model.dart';
 import 'package:gemini_app/utils/db_helper.dart';
 import 'package:gemini_app/utils/network.dart';
 import 'package:gemini_app/utils/text_style.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:theme_change/theme_change.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,9 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.put(HomeController());
   TextEditingController txtSearch = TextEditingController();
 
-  LikeController likeController = Get.put(LikeController());
+  HistoryController lController = Get.put(HistoryController());
   NetworkConnection connection = NetworkConnection();
-
+  ItemScrollController itemScrollController = ItemScrollController();
+  ScrollOffsetController scrollOffsetController = ScrollOffsetController();
+  ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  ScrollOffsetListener scrollOffsetListener = ScrollOffsetListener.create();
   @override
   void initState() {
     super.initState();
@@ -39,10 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  ThemeChange.themeController.setTheme();
+                  Get.toNamed('setting');
                 },
-                icon: Obx(
-                    () => Icon(ThemeChange.themeController.themeMode.value)))
+                icon: Icon(Icons.settings))
           ],
         ),
         body: Obx(
