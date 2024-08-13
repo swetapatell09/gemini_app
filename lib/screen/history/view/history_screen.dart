@@ -57,7 +57,7 @@ class _LikeScreenState extends State<HistoryScreen> {
                         itemBuilder: (context, index) {
                           return AnimationConfiguration.staggeredList(
                             position: index,
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             child: SlideAnimation(
                               verticalOffset: 50,
                               child: FadeInAnimation(
@@ -66,46 +66,45 @@ class _LikeScreenState extends State<HistoryScreen> {
                                       controller.chatList[index].status == 0
                                           ? Alignment.centerRight
                                           : Alignment.centerLeft,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(15),
-                                    margin: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: ThemeChange.themeController
-                                                      .pTheme.value ==
-                                                  true
-                                              ? [
-                                                  Colors.white.withOpacity(0.4),
-                                                  Colors.blue.withOpacity(0.4)
-                                                ]
-                                              : [
-                                                  Colors.red.withOpacity(0.25),
-                                                  Colors.blue.withOpacity(0.25)
-                                                ],
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SelectableText(
-                                            '${controller.chatList[index].result}',
-                                            style: txt18),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Align(
-                                          alignment: Alignment.centerRight,
-                                          child: IconButton(
-                                              onPressed: () {
-                                                deleteDialog(context, index);
-                                              },
-                                              icon: Icon(
-                                                Icons.delete,
-                                                color: Colors.red,
-                                              )),
-                                        )
-                                      ],
+                                  child: InkWell(
+                                    onTap: () {
+                                      deleteDialog(context, index);
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.all(15),
+                                      margin: const EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: ThemeChange.themeController
+                                                        .pTheme.value ==
+                                                    true
+                                                ? [
+                                                    Colors.white
+                                                        .withOpacity(0.4),
+                                                    Colors.blue.withOpacity(0.4)
+                                                  ]
+                                                : [
+                                                    Colors.red
+                                                        .withOpacity(0.25),
+                                                    Colors.blue
+                                                        .withOpacity(0.25)
+                                                  ],
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              deleteDialog(context, index);
+                                            },
+                                            child: SelectableText(
+                                                '${controller.chatList[index].result}',
+                                                style: txt18),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
